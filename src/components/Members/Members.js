@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 import masonry from 'react-masonry-component'
 const Masonry = masonry(React)
 import MembersPreview from './MembersPreview'
 import Loading from '../Loading'
+import Search from '../Search'
 
 const masonryOptions = {
   containerStyle: {
@@ -15,7 +16,7 @@ const masonryOptions = {
 class Members extends Component {
 
   render() {
-    const { members, hasLess, hasMore, pageIndex, totalItems } = this.props
+    const { members, hasLess, hasMore, pageIndex, totalItems, searchInfo } = this.props
     if (totalItems === 0) {
       return (
         <div className="container">
@@ -23,14 +24,16 @@ class Members extends Component {
         </div>
       )
     }
+
     return (
       <div className="container">
         <h1>Members</h1>
+        <Search {...searchInfo} />
         <Masonry
-            className={'row masonry'} // default ''
-            elementType={'div'} // default 'div'
-            options={masonryOptions} // default {}
-            disableImagesLoaded={false} // default false
+          className={'row masonry'}
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
         >
           {
             members.map((member) => {
@@ -82,11 +85,13 @@ class Members extends Component {
 }
 
 Members.propTypes = {
-  hasLess: React.PropTypes.bool,
-  hasMore: React.PropTypes.bool,
-  members: React.PropTypes.array,
-  pageIndex: React.PropTypes.number,
-  totalItems: React.PropTypes.number,
+  hasLess: PropTypes.bool,
+  hasMore: PropTypes.bool,
+  members: PropTypes.array,
+  pageIndex: PropTypes.number,
+  searchInfo: PropTypes.object,
+  totalItems: PropTypes.number,
+  updateFilters: PropTypes.func.isRequired,
 }
 
 export default Members

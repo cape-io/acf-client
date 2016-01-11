@@ -72,6 +72,7 @@
     "redux-simple-router": "^0.0.10",
     "redux-thunk": "^1.0.0",
     "scroll-behavior": "^0.3.0",
+    "seamless-immutable": "5.x",
     "validator": "^4.4.0"
   },
   "devDependencies": {
