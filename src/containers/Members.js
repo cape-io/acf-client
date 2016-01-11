@@ -55,7 +55,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   const data = filterItems(member, filterInfo)
-  const { list, hasMore, hasLess, pageIndex, totalItems } = getPagerInfo(data, { page })
+  const { list, hasMore, hasLess, pageIndex, totalItems } = getPagerInfo(data, { page, perPage: 36 })
   return {
     members: list,
     hasLess,
