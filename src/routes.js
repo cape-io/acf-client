@@ -7,6 +7,7 @@ import {
   Member,
   Members,
   NotFound,
+  Contribute,
     // UserPage,
   } from './containers'
 
@@ -22,6 +23,7 @@ export default function createRoutes() {
       <Route path="about" component={About} />
       <Route path="members" component={Members} />
       <Route path="members/:id" component={Member} />
+      <Route path="contribute" component={Contribute} />
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>
