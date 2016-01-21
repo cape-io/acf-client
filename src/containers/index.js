@@ -1,5 +1,6 @@
 export App from './App'
 export About from './About'
+export Contribute from './Contribute'
 export Member from './Member'
 export Members from './Members'
 export NotFound from './NotFound'
