@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
 function NavbarLink({ children, className, component, href, to }) {
-  const Comp = component || Link;
+  const Comp = component || Link
 
   let Linkelement = (
     <Comp to={to} className={className} activeStyle={{
@@ -10,17 +10,17 @@ function NavbarLink({ children, className, component, href, to }) {
     }}>
       {children}
     </Comp>
-  );
+  )
   if (href) {
     Linkelement = (
       <a href={href}>
         {children}
       </a>
-    );
+    )
   }
 
-  return Linkelement;
+  return Linkelement
 }
 
 
-export default NavbarLink;
+export default NavbarLink
