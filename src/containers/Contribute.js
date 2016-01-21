@@ -1,15 +1,9 @@
 import { connect } from 'react-redux'
-import Component from '../components/Contribute'
+import Component from '../src/components/Contribute'
 
 function mapStateToProps(state, ownProps) {
-  const {
-    entities: { contribute },
-  } = state
-  const { id } = ownProps.params || {}
 
   return {
-    slug: id,
-    ...contribute,
   }
 }
 

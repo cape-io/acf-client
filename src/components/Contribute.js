@@ -32,13 +32,13 @@ function Contribute({ }) {
   }
 });
 
-Loading.propTypes = {
-  Contribute: PropTypes.radio.isRequired,
-  Sustaining: PropTypes.radio.isRequired,
+Contribute.propTypes = {
+  Contribute: PropTypes.radio,
+  Sustaining: PropTypes.radio,
   Name: PropTypes.string.isRequired,
-  Comment: PropTypes.string.isRequired,
+  Comment: PropTypes.string,
 }
-Loading.defaultProps = {
+Contribute.defaultProps = {
   Contribute: "One-Time Contribution",
   Sustaining: "Monthly Sustaining Contribution",
   Name: "Recognition Name(s)",
