@@ -28,7 +28,6 @@ export function filterCollection(items, filterParams) {
   if (isEmpty(filterParams)) {
     return values(items)
   }
-  console.log(filterParams)
   // Filter based on an array of params.
   if (isArray(filterParams)) {
     return filter(items, item =>
