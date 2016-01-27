@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import compact from 'lodash/array/compact'
+import each from 'lodash/collection/each'
 import every from 'lodash/collection/every'
 import filter from 'lodash/collection/filter'
 import partial from 'lodash/function/partial'
@@ -53,7 +54,16 @@ function mapStateToProps(state, ownProps) {
       value: profile.displayName.value,
     })
   }
-
+  const stateOptions = {}
+  function addState(item) {
+    const state = item.address && item.address.state
+    if (!state) return
+    if (!stateOptions[state]) {
+      stateOptions[state] = { active: false, itemCount: 0, label: state, value: state }
+    }
+    stateOptions[state].itemCount++
+  }
+  each(member, addState)
   const data = filterItems(member, filterInfo)
   const { list, hasMore, hasLess, pageIndex, totalItems } = getPagerInfo(data, { page, perPage: 36 })
   return {
@@ -61,6 +71,7 @@ function mapStateToProps(state, ownProps) {
     hasLess,
     hasMore,
     pageIndex,
+    states: values(stateOptions),
     totalItems,
     filterInfo: profile,
   }
