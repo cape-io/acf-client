@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 import each from 'lodash/collection/each'
 import get from 'lodash/object/get'
 import partial from 'lodash/function/partial'
-
-// import merge from 'lodash/object/merge'
+import sortBy from 'lodash/collection/sortBy'
 import values from 'lodash/object/values'
-// import { replacePath } from 'redux-simple-router'
 
 import Component from '../components/Members/Members'
 import { getPagerInfo } from '../helpers/pager'
@@ -61,7 +59,7 @@ function mapStateToProps(state, ownProps) {
     totalItems,
     filterStates: {
       noFilterText: 'Select State',
-      options: values(stateOptions),
+      options: sortBy(values(stateOptions), 'label'),
       value: filterStateValue,
     },
     searchInfo: {
