@@ -1,4 +1,12 @@
+import isEmpty from 'lodash/lang/isEmpty'
 export function getPagerInfo(items, opts) {
+  if (isEmpty(items)) {
+    return {
+      hasLess: false,
+      hasMore: false,
+      totalItems: 0,
+    }
+  }
   const defaultOpts = {
     page: 1,
     perPage: 48,

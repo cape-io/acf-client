@@ -2,19 +2,22 @@ import React, { PropTypes } from 'react'
 import map from 'lodash/collection/map'
 import classnames from 'classnames'
 
-function ScheduleFilters({ className, filters, select, update, placeholder }) {
+function Filter({ className, options, noFilterText, onChange, placeholder }) {
+  function handleChange(event) {
+    const newValue = event.target.value
+    onChange(newValue)
+  }
   return (
-    <input
+    <select
       className={className}
-      type="select"
       placeholder={placeholder}
-      onChange={update}
+      onChange={handleChange}
     >
-      <option value={null}>
-        {select}
+      <option value="-">
+        {noFilterText}
       </option>
       {
-        map(filters, ({ active, label, value }, index) => (
+        map(options, ({ active, label, value }, index) => (
           <option
             key={index}
             className={classnames({ active })}
@@ -24,18 +27,18 @@ function ScheduleFilters({ className, filters, select, update, placeholder }) {
           </option>
         ))
       }
-    </input>
+    </select>
   )
 }
 
-ScheduleFilters.propTypes = {
+Filter.propTypes = {
   className: PropTypes.string,
-  filters: PropTypes.array.isRequired,
-  select: PropTypes.string,
-  update: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  noFilterText: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 }
-ScheduleFilters.defaultProps = {
-  select: 'Select',
+Filter.defaultProps = {
+  noFilterText: 'Select',
 }
 
-export default ScheduleFilters
+export default Filter

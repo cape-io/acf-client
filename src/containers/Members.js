@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 
-import compact from 'lodash/array/compact'
 import each from 'lodash/collection/each'
-import every from 'lodash/collection/every'
-import filter from 'lodash/collection/filter'
+import get from 'lodash/object/get'
 import partial from 'lodash/function/partial'
 
 // import merge from 'lodash/object/merge'
@@ -12,30 +10,8 @@ import values from 'lodash/object/values'
 
 import Component from '../components/Members/Members'
 import { getPagerInfo } from '../helpers/pager'
-import { handleSearch } from '../redux/modules/filters'
-
-export function filterItem(item, { fieldId, compare, value }) {
-  if (!value) return true
-  switch (compare) {
-    case 'equal':
-      return item[fieldId] === value
-    case 'includes':
-      return every(compact(value.split(' ')), searchTxt =>
-        item[fieldId].toLowerCase().includes(searchTxt)
-      )
-    default:
-      return true
-  }
-}
-// Filter down items.
-export function filterItems(items, filterInfo) {
-  if (!filterInfo) {
-    return values(items)
-  }
-  return filter(items, (item) => {
-    return every(filterInfo, filterParams => filterItem(item, filterParams))
-  })
-}
+import { handleSearch, update as updateFilter } from '../redux/modules/filters'
+import { filterCollection } from '../utils/filter'
 
 function mapStateToProps(state, ownProps) {
   const {
@@ -47,11 +23,20 @@ function mapStateToProps(state, ownProps) {
   const page = query.page && parseInt(query.page, 10)
 
   const filterInfo = []
-  if (profile.displayName && profile.displayName.value) {
+  const searchString = get(profile, 'displayName.value', '')
+  if (searchString) {
     filterInfo.push({
       compare: 'includes',
       fieldId: 'displayName',
       value: profile.displayName.value,
+    })
+  }
+  const filterStateValue = get(profile, [ 'address.state', 'value' ], null)
+  if (filterStateValue && filterStateValue !== '-') {
+    filterInfo.push({
+      compare: 'equal',
+      fieldId: 'address.state',
+      value: filterStateValue,
     })
   }
   const stateOptions = {}
@@ -63,30 +48,37 @@ function mapStateToProps(state, ownProps) {
     }
     stateOptions[state].itemCount++
   }
-  each(member, addState)
-  const data = filterItems(member, filterInfo)
+  if (member) {
+    each(member, addState)
+  }
+  const data = member ? filterCollection(member, filterInfo) : []
   const { list, hasMore, hasLess, pageIndex, totalItems } = getPagerInfo(data, { page, perPage: 36 })
   return {
     members: list,
     hasLess,
     hasMore,
     pageIndex,
-    states: values(stateOptions),
     totalItems,
-    filterInfo: profile,
+    filterStates: {
+      noFilterText: 'Select State',
+      options: values(stateOptions),
+      value: filterStateValue,
+    },
+    searchInfo: {
+      value: searchString,
+    },
   }
 }
 
 const mapDispatchToProps = {
-  handleSearch,
+  searchChange: partial(handleSearch, 'profile', 'displayName'),
+  usStateChange: partial(updateFilter, 'profile', 'address.state', 'value'),
 }
 
-function mergeProps({ filterInfo, ...stateProps }, { handleSearch }, ownProps) {
-  const searchInfo = {
-    onChange: partial(handleSearch, 'profile', 'displayName'),
-    value: (filterInfo && filterInfo.displayName && filterInfo.displayName.value) || '',
-  }
-  return Object.assign({ searchInfo }, ownProps, stateProps)
+function mergeProps(stateProps, actions, ownProps) {
+  stateProps.searchInfo.onChange = actions.searchChange
+  stateProps.filterStates.onChange = actions.usStateChange
+  return Object.assign({}, ownProps, stateProps)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Component)

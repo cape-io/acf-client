@@ -4,8 +4,11 @@ import { Link } from 'react-router'
 class MembersPreview extends Component {
 
   render() {
-    const { displayName, searchImg, intro, slug } = this.props
-
+    const { displayName, id, searchImg, intro, slug, onError } = this.props
+    function handleImgError() {
+      if (onError) onError(id)
+      console.log('img error', slug, id)
+    }
     return (
       <div className="col-xs-12 col-sm-4 col-md-3 animated fadeIn masonry-item">
         <div className="thumbnail" style={{
@@ -21,6 +24,7 @@ class MembersPreview extends Component {
                 <img
                   alt={displayName}
                   src={`${searchImg.url}?w=200`}
+                  onError={handleImgError}
                   style={{
                     maxHeight: '125px',
                     margin: 'auto',

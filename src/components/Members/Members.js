@@ -6,6 +6,7 @@ const Masonry = masonry(React)
 import MembersPreview from './MembersPreview'
 import Loading from '../Loading'
 import Search from '../Search'
+import Filter from '../Filter'
 
 const masonryOptions = {
   containerStyle: {
@@ -16,8 +17,12 @@ const masonryOptions = {
 class Members extends Component {
 
   render() {
-    const { members, hasLess, hasMore, pageIndex, totalItems, searchInfo } = this.props
-    if (totalItems === 0) {
+    const {
+      filterStates,
+      members, hasLess, hasMore,
+      pageIndex, totalItems, searchInfo,
+    } = this.props
+    if (totalItems === 0 && !searchInfo.value) {
       return (
         <div className="container">
           <Loading message={`Loading members...`} />
@@ -28,7 +33,14 @@ class Members extends Component {
     return (
       <div className="container">
         <h1>Members</h1>
-        <Search {...searchInfo} />
+        <div className="row">
+          <div className="col-sm-6">
+            <Search {...searchInfo} />
+          </div>
+          <div className="col-sm-6">
+            <Filter {...filterStates} />
+          </div>
+        </div>
         <Masonry
           className={'row masonry'}
           elementType={'div'}
@@ -85,13 +97,13 @@ class Members extends Component {
 }
 
 Members.propTypes = {
+  filterStates: PropTypes.object,
   hasLess: PropTypes.bool,
   hasMore: PropTypes.bool,
   members: PropTypes.array,
   pageIndex: PropTypes.number,
   searchInfo: PropTypes.object,
   totalItems: PropTypes.number,
-  updateFilters: PropTypes.func.isRequired,
 }
 
 export default Members
