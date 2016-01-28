@@ -57,8 +57,7 @@ class Members extends Component {
         </Masonry>
         <nav>
           <ul className="pager">
-            <li className={classnames({
-              previous: true,
+            <li className={classnames('previous', {
               disabled: !hasLess,
             })}>
               <Link
@@ -70,11 +69,10 @@ class Members extends Component {
                   }
                 }}
               >
-                Previous
+                <button className="btn btn-lg">Previous</button>
               </Link>
             </li>
-            <li className={classnames({
-              next: true,
+            <li className={classnames('next', {
               disabled: !hasMore,
             })}>
               <Link
@@ -86,7 +84,7 @@ class Members extends Component {
                   }
                 }}
               >
-                Next
+                <button className="btn btn-lg">Next</button>
               </Link>
             </li>
           </ul>
