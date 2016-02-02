@@ -1,21 +1,20 @@
 import React, { PropTypes } from 'react'
 
 // Online contribution donation form
-function Contribute({ Once, Sustaining, Name, Comment, NameHelp, Donation }) {
+function Contribute({ once, sustaining, name, comment, nameHelp, donation }) {
   return (
-
-    <form>
+    <div>
 
       <div>
         <label>
           <input type="radio" name="optionsRadios" id="optionsRadios1" defaultValue="option1" defaultChecked />
-          {Once}
+          {once}
         </label>
       </div>
       <div>
         <label>
           <input type="radio" name="optionsRadios" id="optionsRadios2" defaultValue="option2" />
-          {Sustaining}
+          {sustaining}
         </label>
       </div>
 
@@ -33,7 +32,8 @@ optionsRadios={Contribute != null ? 'test' : 'shit works'}
 
       <div>
         <label className="radio-inline">
-          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" /> { Donation }
+          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
+          { donation }
         </label>
         <label className="radio-inline">
           <input type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" /> $10
@@ -50,37 +50,39 @@ optionsRadios={Contribute != null ? 'test' : 'shit works'}
       </div>
 
       <div className="form-group">
-        <label htmlFor="exampleInputName">{ Name }</label>
+        <label htmlFor="exampleInputName">{ name }</label>
         <input type="text" className="form-control" id="exampleInputName" placeholder="Name" />
-          <span id="helpBlock" className="help-block">{ NameHelp }</span>
+          <span id="helpBlock" className="help-block">{ nameHelp }</span>
       </div>
 
       <div className="form-group">
-        <label htmlFor="exampleComment">{ Comment }</label>
+        <label htmlFor="exampleComment">{ comment }</label>
         <textarea className="form-control" rows={3} defaultValue={""} />
       </div>
       <button type="submit" className="btn btn-default">Continue
       </button>
 
-    </form>
+    </div>
   )
 }
 
 Contribute.propTypes = {
-  Once: PropTypes.radio,
-  Sustaining: PropTypes.radio,
-  Name: PropTypes.string.isRequired,
-  NameHelp: PropTypes.string,
-  Comment: PropTypes.string,
-  Donations: PropTypes.array,
+  once: PropTypes.string,
+  sustaining: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  nameHelp: PropTypes.string,
+  comment: PropTypes.string,
+  donations: PropTypes.array,
+  toggleRecurring: PropTypes.bool,
 }
+
 Contribute.defaultProps = {
-  Once: 'One-Time Contribution',
-  Sustaining: 'Monthly Sustaining Contribution',
-  Name: 'Recognition Name(s)',
-  NameHelp: 'Please list your name(s) as you would like to be acknowledged in ACFs donor list.',
-  Comment: 'Additional Comment(s)',
-  Donation: '$',
+  once: 'One-Time Contribution',
+  sustaining: 'Monthly Sustaining Contribution',
+  name: 'Recognition Name(s)',
+  nameHelp: 'Please list your name(s) as you would like to be acknowledged in ACFs donor list.',
+  comment: 'Additional Comment(s)',
+  donation: '$5',
 }
 
 export default Contribute
