@@ -1,5 +1,5 @@
 import { CALL_API, Schemas } from '../middleware/api'
-import isEmpty from 'lodash/lang/isEmpty'
+import isEmpty from 'lodash/isEmpty'
 
 export const MEMBERS_REQUEST = 'MEMBERS_REQUEST'
 export const MEMBERS_SUCCESS = 'MEMBERS_SUCCESS'

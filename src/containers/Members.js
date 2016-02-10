@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
-import each from 'lodash/collection/each'
-import get from 'lodash/object/get'
-import partial from 'lodash/function/partial'
-import sortBy from 'lodash/collection/sortBy'
-import values from 'lodash/object/values'
+import each from 'lodash/each'
+import get from 'lodash/get'
+import partial from 'lodash/partial'
+import sortBy from 'lodash/sortBy'
+import values from 'lodash/values'
 
 import Component from '../components/Members/Members'
 import { getPagerInfo } from '../helpers/pager'

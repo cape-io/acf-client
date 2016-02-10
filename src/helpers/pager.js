@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/lang/isEmpty'
+import isEmpty from 'lodash/isEmpty'
 export function getPagerInfo(items, opts) {
   if (isEmpty(items)) {
     return {
