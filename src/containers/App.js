@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { pushPath } from 'redux-simple-router'
-import { loadMembers, resetErrorMessage } from '../redux/actions'
+import { loadMembers } from '../redux/actions'
 import Header from '../components/Header/Header'
 
 // This is called from within the container component class.
@@ -56,9 +55,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  // Injected by React Router
   children: PropTypes.node,
-  // Injected by React Redux
   errorMessage: PropTypes.string,
   loadMembers: PropTypes.func.isRequired,
   navLinks: PropTypes.array.isRequired,
@@ -68,11 +65,9 @@ App.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { db, errorMessage } = state
-  const { navLinks, support, title, image, description } = db
+  const { db: { navLinks, support, title, image, description } } = state
   return {
     description,
-    errorMessage,
     image,
     navLinks,
     support,
@@ -82,6 +77,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   loadMembers,
-  resetErrorMessage,
-  pushPath,
 })(App)

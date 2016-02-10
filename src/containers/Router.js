@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 
 import About from './About'
 import Contribute from './Contribute'
+import Loading from '../components/Loading'
 import Member from './Member'
 import Members from './Members'
 import NotFound from './NotFound'
@@ -9,6 +10,7 @@ import NotFound from './NotFound'
 const routeIndex = {
   about: About,
   contribute: Contribute,
+  loading: Loading,
   member: Member,
   members: Members,
   notFound: NotFound,
