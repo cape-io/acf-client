@@ -64,6 +64,6 @@ export default function configureStore(initialState) {
     })
   }
   syncHistoryWithStore(store, window, historyCache)
-  console.log(store.getState())
+
   return store
 }

@@ -21,13 +21,7 @@ function Contribute({ once, sustaining, name, comment, nameHelp, donation }) {
 optionsRadios={Contribute != null ? 'test' : 'shit works'}
 
       <form className="form-inline">
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputAmount"></label>
-          <div className="input-group">
-            <div className="input-group-addon">$</div>
-            <input type="text" className="form-control" id="exampleInputAmount" placeholder="" />
-          </div>
-        </div>
+
       </form>
 
       <div>
@@ -49,16 +43,7 @@ optionsRadios={Contribute != null ? 'test' : 'shit works'}
         </label>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="exampleInputName">{ name }</label>
-        <input type="text" className="form-control" id="exampleInputName" placeholder="Name" />
-          <span id="helpBlock" className="help-block">{ nameHelp }</span>
-      </div>
 
-      <div className="form-group">
-        <label htmlFor="exampleComment">{ comment }</label>
-        <textarea className="form-control" rows={3} defaultValue={""} />
-      </div>
       <button type="submit" className="btn btn-default">Continue
       </button>
 

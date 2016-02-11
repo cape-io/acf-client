@@ -25,6 +25,7 @@ function Router(props) {
 }
 
 Router.propTypes = {
-  routeId: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
 }
 export default Router

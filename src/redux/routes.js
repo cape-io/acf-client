@@ -6,8 +6,8 @@ import { selectActiveKeyDefault } from 'redux-history-sync'
  */
 const router = createRouter({ trailingSlash: false })
 router.addRoute('home', '/')
-router.addRoute('members', '/member')
-router.addRoute('member', '/member/(:id)')
+router.addRoute('members', '/members')
+router.addRoute('member', '/members/(:id)')
 router.addRoutes([
   'about',
   'contribute',

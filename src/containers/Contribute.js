@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Component from '../components/Contribute'
+import Component from '../components/Contribution'
 
 function mapStateToProps(state, ownProps) {
 
