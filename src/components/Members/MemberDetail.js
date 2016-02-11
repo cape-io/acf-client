@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
+import { Link } from 'redux-history-sync'
 import InfoBox from './InfoBox'
 import Footer from './Footer'
 import Right from './Right'

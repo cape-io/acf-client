@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
+import { Link } from 'redux-history-sync'
 import classnames from 'classnames'
 import masonry from 'react-masonry-component'
 const Masonry = masonry(React)

@@ -1,5 +1,4 @@
 import React from 'react'
-import { IndexLink } from 'react-router'
 import NavbarLink from './NavbarLink'
 import SearchBox from './SearchBox'
 
@@ -18,7 +17,7 @@ function Header({ navLinks }) {
           </ul>
           {/* /BUTTONS */}
           {/* Logo */}
-          <NavbarLink to="/" className="logo pull-left" component={IndexLink}>
+          <NavbarLink to="/" className="logo pull-left">
             <img src="https://composersforum.org/sites/all/themes/acfzen/acfzen/logo.png" alt />
           </NavbarLink>
           <div className="navbar-collapse pull-right nav-main-collapse collapse">

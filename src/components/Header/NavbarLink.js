@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'redux-history-sync'
 
 function NavbarLink({ children, className, component, href, to }) {
   const Comp = component || Link

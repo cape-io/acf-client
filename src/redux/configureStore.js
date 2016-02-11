@@ -10,7 +10,6 @@ import {
   createHistoryCache,
   historyMiddleware,
   makeHydratable,
-  historyReducer,
   getInitState,
 } from 'redux-history-sync'
 
@@ -18,21 +17,22 @@ import {
 import io from 'socket.io-client'
 import { middleware as createSocketMiddleware } from 'cape-redux-socket'
 const location = 'http://edit.l.cape.io/'
-const socket = createSocketMiddleware(io(location))
 
 // Redux Reducers.
 // Our reducer index.
 import reducer, { defaultState } from './reducer'
-
 // Custom api.
 import api from './middleware/api'
 
 // The redux state sidebar thing store enhancer.
 import DevTools from '../containers/DevTools'
 
+const historyCache = createHistoryCache()
 // Define the middeware we want to apply to the store.
 const middleware = [
   api,
+  historyMiddleware(window.history, historyCache),
+  createSocketMiddleware(io(location)),
   thunk,
 ]
 
@@ -52,8 +52,6 @@ export default function configureStore(initialState) {
     initState,
     compose(
       applyMiddleware(...middleware),
-      // Logger must be last middleware in chain(#20).
-      // applyMiddleware(createLogger()),
       DevTools.instrument()
     )
   )
@@ -65,6 +63,7 @@ export default function configureStore(initialState) {
       store.replaceReducer(nextRootReducer)
     })
   }
-  syncHistoryWithStore(history, store)
+  syncHistoryWithStore(store, window, historyCache)
+  console.log(store.getState())
   return store
 }
