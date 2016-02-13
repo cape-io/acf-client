@@ -7,7 +7,7 @@ import { reducer as formReducer } from 'redux-form'
 import db from './modules/db'
 import entity from './modules/entity'
 import errorMessage from './modules/errorMessage'
-import filters from './modules/filters'
+import filter from './modules/filter'
 
 export defaultState from './defaultState'
 
@@ -15,7 +15,7 @@ export default combineReducers({
   db,
   entity,
   errorMessage,
-  filters,
+  filter,
   form: formReducer,
   history,
   id,

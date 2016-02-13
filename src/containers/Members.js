@@ -8,7 +8,7 @@ import values from 'lodash/values'
 
 import Component from '../components/Members/Members'
 import { getPagerInfo } from '../helpers/pager'
-import { handleSearch, update as updateFilter } from '../redux/modules/filters'
+import { handleSearch, update as updateFilter } from '../redux/modules/filter'
 import { filterCollection } from '../utils/filter'
 
 function mapStateToProps(state, ownProps) {
