@@ -1,6 +1,6 @@
 {
   "name": "acf-client",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "ACF Client App",
   "homepage": "https://github.com/cape-io/acf-client",
   "author": "Kai Curry <kai@cape.io> (http://github.com/webmasterkai)",
@@ -18,7 +18,7 @@
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "preinstall": "mkdir -p lib && babel ./src -d lib",
+    "postinstall": "mkdir -p lib && babel ./src -d lib",
     "start": "node server.js",
     "lint": "eslint src"
   },
