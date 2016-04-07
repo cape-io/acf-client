@@ -70,6 +70,7 @@
     "redux-history-sync": "^1.4.0",
     "redux-localstorage": "^1.0.0-rc4",
     "redux-thunk": "^2.0.1",
+    "reselect": "^2.2.1",
     "seamless-immutable": "^5.1.1",
     "socket.io-client": "^1.4.5",
     "validator": "^5.2.0"
