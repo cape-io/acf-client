@@ -39,21 +39,11 @@ function Contribute({ options, value, onChange, onFocus, onBlur }) {
 }
 
 Contribute.propTypes = {
-  once: PropTypes.string,
-  sustaining: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  nameHelp: PropTypes.string,
-  comment: PropTypes.string,
-  donations: PropTypes.array,
-  toggleRecurring: PropTypes.bool,
+  options: PropTypes.array.isRequired,
+  value: PropTypes.string,
 }
 
 Contribute.defaultProps = {
-  once: 'One-Time Contribution',
-  sustaining: 'Monthly Sustaining Contribution',
-  name: 'Recognition Name(s)',
-  nameHelp: 'Please list your name(s) as you would like to be acknowledged in ACFs donor list.',
-  comment: 'Additional Comment(s)',
   options: [
     20, 50, 100, 250, 500,
   ],

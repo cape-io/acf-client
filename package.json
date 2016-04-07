@@ -1,8 +1,8 @@
 {
-  "name": "boiler",
-  "version": "1.0.1",
-  "description": "Boilerplate with hot reloading React components.",
-  "homepage": "https://github.com/cape-io/boiler",
+  "name": "acf-client",
+  "version": "2.0.0",
+  "description": "ACF Client App",
+  "homepage": "https://github.com/cape-io/acf-client",
   "author": "Kai Curry <kai@cape.io> (http://github.com/webmasterkai)",
   "contributors": [
     {
@@ -18,10 +18,12 @@
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
+    "install": "mkdir -p lib && babel ./src -d lib",
     "start": "node server.js",
     "lint": "eslint src"
   },
-  "main": "server.js",
+  "browser": "src/index.js",
+  "main": "lib/node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cape-io/boiler.git"
@@ -80,6 +82,9 @@
     "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-babel": "^3.1.0",
