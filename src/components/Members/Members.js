@@ -25,7 +25,7 @@ class Members extends Component {
     if (totalItems === 0 && !searchInfo.value) {
       return (
         <div className="container">
-          <Loading message={`Loading members...`} />
+          <Loading message={'Loading members...'} />
         </div>
       )
     }

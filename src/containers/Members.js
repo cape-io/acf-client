@@ -13,9 +13,9 @@ import { filterCollection } from '../utils/filter'
 
 function mapStateToProps(state, ownProps) {
   const {
-    entities: { member },
-    filters: { profile },
+    filter: { profile },
   } = state
+  const member = null
   const { query } = ownProps.location || {}
 
   const page = query.page && parseInt(query.page, 10)

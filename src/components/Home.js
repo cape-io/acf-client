@@ -13,6 +13,6 @@ Home.propTypes = {
   message: PropTypes.string.isRequired,
 }
 Home.defaultProps = {
-  message: 'Placeholder...',
+  message: 'Homepage Placeholder...',
 }
 export default Home
