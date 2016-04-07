@@ -26,10 +26,10 @@
   "main": "lib/node.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cape-io/boiler.git"
+    "url": "https://github.com/cape-io/acf-client"
   },
   "bugs": {
-    "url": "https://github.com/cape-io/cape-editor/issues"
+    "url": "https://github.com/cape-io/acf-client/issues"
   },
   "keywords": [
     "cape",
