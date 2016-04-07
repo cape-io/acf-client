@@ -18,7 +18,7 @@
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "install": "mkdir -p lib && babel ./src -d lib",
+    "preinstall": "mkdir -p lib && babel ./src -d lib",
     "start": "node server.js",
     "lint": "eslint src"
   },
