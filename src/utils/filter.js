@@ -8,9 +8,9 @@ import isEmpty from 'lodash/isEmpty'
 import isObject from 'lodash/isObject'
 import values from 'lodash/values'
 
-export function filterItem(item, { fieldId, compare, value }) {
+export function filterItem(item, { path, compare, value }) {
   if (!value) return true
-  const itemValue = get(item, fieldId)
+  const itemValue = get(item, path)
   switch (compare) {
     case 'is':
     case 'equal':
@@ -26,7 +26,7 @@ export function filterItem(item, { fieldId, compare, value }) {
 
 export function filterCollection(items, filterParams) {
   if (isEmpty(filterParams)) {
-    return values(items)
+    return isObject(items) ? values(items) : items
   }
   // Filter based on an array of params.
   if (isArray(filterParams)) {

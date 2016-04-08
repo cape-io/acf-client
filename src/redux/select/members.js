@@ -1,12 +1,15 @@
 import { createSelector } from 'reselect'
 import { entitySelector } from 'redux-graph'
+import immutable from 'seamless-immutable'
 import filter from 'lodash/filter'
 import each from 'lodash/forEach'
 import keyBy from 'lodash/keyBy'
+import mapValues from 'lodash/mapValues'
 import partRight from 'lodash/partialRight'
 import sortBy from 'lodash/sortBy'
 
 import { getPagerInfo } from '../../helpers/pager'
+import { filterCollection } from '../../utils/filter'
 
 export const memberSelector = createSelector(
   entitySelector,
@@ -18,13 +21,20 @@ export const membersBySlug = createSelector(
   partRight(keyBy, 'slug')
 )
 
-export const membersPager = createSelector(
-  memberSelector,
-  () => 1,
-  () => 36,
-  (members, page, perPage) => getPagerInfo(members, { page, perPage, resultKey: 'members' })
-)
-
+export const filterInfo = immutable({
+  prefix: 'memberFilters',
+  filter: {
+    name: {
+      compare: 'includes',
+      path: 'displayName',
+    },
+    states: {
+      compare: 'equal',
+      nilValue: '-',
+      path: 'address.state',
+    },
+  },
+})
 function stateOptions(members) {
   const stateIndex = {}
   function addState(item) {
@@ -37,7 +47,11 @@ function stateOptions(members) {
   }
   each(members, addState)
   const states = sortBy(stateIndex, 'label')
-  states.unshift({ itemCount: members.length, label: 'Select...', value: '-' })
+  states.unshift({
+    itemCount: members.length,
+    label: 'Select...',
+    value: filterInfo.filter.states.nilValue,
+  })
   return states
 }
 
@@ -46,11 +60,43 @@ export const stateOptionSelector = createSelector(
   stateOptions
 )
 
+function filterVal(filterState, filterItem, key) {
+  const fieldState = filterState[key]
+  if (!fieldState || !fieldState.value || fieldState.value === filterItem.nilValue) return null
+  return fieldState.value
+}
+export function getFilters(filterState) {
+  const filters = mapValues(filterInfo.filter, (filterItem, key) =>
+    filterItem.set('value', filterVal(filterState, filterItem, key))
+  )
+  return filter(filters, item => item.value !== null)
+}
+export const filterSelector = createSelector(
+  state => state.form[filterInfo.prefix],
+  getFilters
+)
+
+export const filteredMembers = createSelector(
+  memberSelector,
+  filterSelector,
+  filterCollection
+)
+
+export const membersPager = createSelector(
+  filteredMembers,
+  () => 1,
+  () => 36,
+  (members, page, perPage) => getPagerInfo(members, { page, perPage, resultKey: 'members' })
+)
+
+function buildFilter(opts) {
+  return filterInfo.setIn([ 'filter', 'states', 'options' ], opts)
+}
 export const membersPage = createSelector(
   membersPager,
   stateOptionSelector,
   (pagerInfo, states) => ({
     ...pagerInfo,
-    filter: { states },
+    filter: buildFilter(states),
   })
 )

@@ -27,7 +27,7 @@ function Select({ options, value, ...props }) {
       value={value}
     >
       {map(options, opt =>
-        <SelectOption {...opts(opt)} active={value === opt.value} />
+        <SelectOption {...opts(opt)} active={value === opt.value} key={opt.value} />
       )}
     </select>
   )
