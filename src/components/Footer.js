@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Footer() {
   return (
@@ -14,9 +14,9 @@ function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
-Footer.propTypes = {};
+Footer.propTypes = {}
 // Logout.defaultProps = {};
 
-export default Footer;
+export default Footer

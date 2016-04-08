@@ -3,6 +3,7 @@ import { entitySelector } from 'redux-graph'
 import immutable from 'seamless-immutable'
 import filter from 'lodash/filter'
 import each from 'lodash/forEach'
+import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
 import mapValues from 'lodash/mapValues'
 import partRight from 'lodash/partialRight'
@@ -20,7 +21,15 @@ export const membersBySlug = createSelector(
   memberSelector,
   partRight(keyBy, 'slug')
 )
-
+function memberIdSelector(state, props) {
+  return props.route.params.id
+}
+export const memberPage = createSelector(
+  membersBySlug,
+  memberIdSelector,
+  (memberIndex, slug) =>
+    memberIndex[slug] && memberIndex[slug].merge({ slug, twitter: null }) || { loading: true, slug }
+)
 export const filterInfo = immutable({
   prefix: 'memberFilters',
   filter: {
@@ -61,7 +70,7 @@ export const stateOptionSelector = createSelector(
 )
 
 function filterVal(filterState, filterItem, key) {
-  const fieldState = filterState[key]
+  const fieldState = get(filterState, key)
   if (!fieldState || !fieldState.value || fieldState.value === filterItem.nilValue) return null
   return fieldState.value
 }

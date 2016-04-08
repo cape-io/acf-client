@@ -1,21 +1,8 @@
 import { connect } from 'react-redux'
+
 import Component from '../components/Members/MemberDetail'
-
-function mapStateToProps(state, ownProps) {
-  const {
-    entities: { member },
-    twitter,
-  } = state
-  const { id } = ownProps.params || {}
-
-  const memberData = member ? member[id] : {}
-  return {
-    slug: id,
-    ...memberData,
-    twitter: twitter && twitter.data,
-  }
-}
+import { memberPage } from '../redux/select/members'
 
 // const mapDispatchToProps = {}
 
-export default connect(mapStateToProps)(Component)
+export default connect(memberPage)(Component)
