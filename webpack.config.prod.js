@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-
+const pkgInfo = require('./package')
 module.exports = {
   devtool: 'source-map',
   entry: [
@@ -16,6 +16,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+        APP_VERSION: JSON.stringify(pkgInfo.version),
       },
     }),
     new webpack.optimize.UglifyJsPlugin({
