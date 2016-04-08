@@ -1,15 +1,18 @@
 import React, { PropTypes } from 'react'
 
+import Breadcrumb from '../Header/Breadcrumb'
 import Loading from '../Loading'
 import LeftSidebar from './MemberDetailLeft'
 import Right from './MemberDetailRight'
 
 function MembersDetail(props) {
-  if (props.loading) {
+  const { displayName, loading } = props
+  if (loading) {
     return <Loading message={ 'Loading member details...'} />
   }
   return (
     <div>
+      <Breadcrumb path={[ { text: 'Members', link: '/members' } ]} activeTitle={displayName} />
       <section>
         <div className="container">
           <LeftSidebar {...props} />

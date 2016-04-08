@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { loadMembers } from '../redux/actions'
 import getRouteInfo from '../redux/routes'
 
-import Header from '../components/Header/Header'
+// import Header from '../components/Header/Header'
+// <Header navLinks={navLinks} styles={{}} title={title} />
 import Router from './Router'
 
 class App extends Component {
@@ -12,7 +13,6 @@ class App extends Component {
     const { navLinks, route, title } = this.props
     return (
       <div id="wrapper">
-        <Header navLinks={navLinks} styles={{}} title={title} />
         <Router {...route} />
       </div>
     )

@@ -18,7 +18,7 @@ function Members(props) {
   const { members, hasLess, hasMore, pageIndex, filter } = props
   return (
     <div className="container">
-      <h1>Member Directory</h1>
+      <h2>Member Directory</h2>
       <Filters {...filter} />
       { members && members.length &&
         <div>
