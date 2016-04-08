@@ -1,5 +1,5 @@
 // Redux.
-import { applyMiddleware, combineReducers, createStore, compose } from 'redux'
+import { applyMiddleware, combineReducers } from 'redux'
 import merge from 'lodash/merge'
 // Allow function action creators.
 import thunk from 'redux-thunk'
@@ -20,13 +20,11 @@ import { middleware as createSocketMiddleware } from 'cape-redux-socket'
 const location = process.env.SOCKET_LOC || ''
 const socket = createSocketMiddleware(io(location))
 
+import createStore from './createStore'
 // Redux Reducers.
 // Our reducer index.
 import * as reducer from './reducer'
 import defaultState from './defaultState'
-
-// The redux state sidebar thing store enhancer.
-import DevTools from '../containers/DevTools'
 
 // Define the middeware we want to apply to the store.
 const middleware = [
@@ -48,18 +46,8 @@ export default function configureStore(initialState) {
   const store = createStore(
     combineReducers(reducer),
     initState,
-    compose(
-      applyMiddleware(...middleware),
-      DevTools.instrument()
-    )
+    applyMiddleware(...middleware)
   )
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducer', () => {
-      const nextRootReducer = combineReducers(require('./reducer'))
-      store.replaceReducer(nextRootReducer)
-    })
-  }
   syncHistoryWithStore(store, window, historyCache)
   return store
 }
