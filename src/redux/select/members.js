@@ -24,11 +24,17 @@ export const membersBySlug = createSelector(
 function memberIdSelector(state, props) {
   return props.route.params.id
 }
+function selectMemberDetails(memberIndex, slug) {
+  console.log(slug)
+  if (memberIndex[slug]) {
+    return memberIndex[slug].merge({ slug, twitter: null })
+  }
+  return { loading: true, slug }
+}
 export const memberPage = createSelector(
   membersBySlug,
   memberIdSelector,
-  (memberIndex, slug) =>
-    memberIndex[slug] && memberIndex[slug].merge({ slug, twitter: null }) || { loading: true, slug }
+  selectMemberDetails
 )
 export const filterInfo = immutable({
   prefix: 'memberFilters',
@@ -90,10 +96,12 @@ export const filteredMembers = createSelector(
   filterSelector,
   filterCollection
 )
-
+export function selectPageIndex(state, props) {
+  return props.route.query && props.route.query.page || 1
+}
 export const membersPager = createSelector(
   filteredMembers,
-  () => 1,
+  selectPageIndex,
   () => 36,
   (members, page, perPage) => getPagerInfo(members, { page, perPage, resultKey: 'members' })
 )

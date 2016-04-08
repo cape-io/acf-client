@@ -29,7 +29,7 @@ function MemberDetailLeft(props) {
           {
             profileTypes &&
             <h3 className="size-11 margin-top-0 margin-bottom-10 text-info">
-              { profileTypes.map(({ label, value }) =>
+              { map(profileTypes, ({ label, value }) =>
                 <div key={value}>{ label }</div>
               )}
             </h3>

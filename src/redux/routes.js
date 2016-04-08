@@ -1,11 +1,11 @@
 import createRouter from 'location-info'
 import { selectActiveKeyDefault } from 'redux-history-sync'
 import { createSelector } from 'reselect'
-
+import { parse } from 'query-string'
 /**
  * Please keep routes in order of importance/processing.
  */
-const router = createRouter({ trailingSlash: false })
+const router = createRouter({ parseSearch: parse, trailingSlash: false })
 const { addRoute, addRoutes, locationInfo } = router
 addRoute('home', '/')
 addRoute('members', '/members')

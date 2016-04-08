@@ -13,7 +13,7 @@ export function getPagerInfo(items, opts) {
     page: 1,
     perPage: 48,
   }
-  const page = opts.page || defaultOpts.page
+  const page = parseInt(opts.page, 10) || defaultOpts.page
   const perPage = opts.perPage || defaultOpts.perPage
   const resultKey = opts.resultKey || defaultOpts.resultKey
   const totalItems = items.length
