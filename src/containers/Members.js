@@ -10,15 +10,15 @@ import Component from '../components/Members/Members'
 import { getPagerInfo } from '../helpers/pager'
 import { handleSearch, update as updateFilter } from '../redux/modules/filter'
 import { filterCollection } from '../utils/filter'
-
+import { membersPage } from '../redux/select/members'
 function mapStateToProps(state, ownProps) {
   const {
     filter: { profile },
   } = state
   const member = null
-  const { query } = ownProps.location || {}
+  // const { query } = ownProps.location || {}
 
-  const page = query.page && parseInt(query.page, 10)
+  const page = 1 // query.page && parseInt(query.page, 10)
 
   const filterInfo = []
   const searchString = get(profile, 'displayName.value', '')
@@ -68,15 +68,15 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-const mapDispatchToProps = {
-  searchChange: partial(handleSearch, 'profile', 'displayName'),
-  usStateChange: partial(updateFilter, 'profile', 'address.state', 'value'),
-}
+// const mapDispatchToProps = {
+//   searchChange: partial(handleSearch, 'profile', 'displayName'),
+//   usStateChange: partial(updateFilter, 'profile', 'address.state', 'value'),
+// }
 
-function mergeProps(stateProps, actions, ownProps) {
-  stateProps.searchInfo.onChange = actions.searchChange
-  stateProps.filterStates.onChange = actions.usStateChange
-  return Object.assign({}, ownProps, stateProps)
-}
+// function mergeProps(stateProps, actions, ownProps) {
+//   stateProps.searchInfo.onChange = actions.searchChange
+//   stateProps.filterStates.onChange = actions.usStateChange
+//   return Object.assign({}, ownProps, stateProps)
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Component)
+export default connect(membersPage)(Component)

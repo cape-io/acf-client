@@ -1,29 +1,26 @@
 import React, { PropTypes } from 'react'
+import { connectField } from 'redux-field'
 
-
-function Search({ onChange, ...props }) {
-  function handleChange(event) {
-    return onChange(event.target.value)
-  }
+function Search({ form: { value }, formEvent }) {
   return (
     <div role="form" className="form-group search">
       <input
+        {...formEvent}
         className="form-control"
         name="item-search"
-        onChange={handleChange}
         placeholder="Search by name"
         type="text"
-        {...props}
+        value={value}
       />
     </div>
   )
 }
 
 Search.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  form: PropTypes.object,
+  formEvent: PropTypes.object,
 }
 Search.defaultProps = {
 }
 
-export default Search
+export default connectField({ prefix: [ 'search' ] })(Search)

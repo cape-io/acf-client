@@ -1,44 +1,16 @@
 import React, { PropTypes } from 'react'
-import map from 'lodash/map'
-import classnames from 'classnames'
+import { connectField } from 'redux-field'
 
-function Filter({ className, options, noFilterText, onChange, placeholder }) {
-  function handleChange(event) {
-    const newValue = event.target.value
-    onChange(newValue)
-  }
+import Select from './Select'
+
+function Filter({ form: { value }, formEvent, ...props }) {
   return (
-    <select
-      className={className}
-      placeholder={placeholder}
-      onChange={handleChange}
-    >
-      <option value="-">
-        {noFilterText}
-      </option>
-      {
-        map(options, ({ active, label, value }, index) => (
-          <option
-            key={index}
-            className={classnames({ active })}
-            value={ value }
-          >
-            { label }
-          </option>
-        ))
-      }
-    </select>
+    <Select {...formEvent} {...props} value={value} />
   )
 }
 
 Filter.propTypes = {
-  className: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  noFilterText: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  form: PropTypes.object,
+  formEvent: PropTypes.object,
 }
-Filter.defaultProps = {
-  noFilterText: 'Select',
-}
-
-export default Filter
+export default connectField({ prefix: [ 'filter' ] })(Filter)
