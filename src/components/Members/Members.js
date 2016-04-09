@@ -17,7 +17,7 @@ const masonryOptions = {
 function Members(props) {
   const { members, hasLess, hasMore, pageIndex, filter } = props
   return (
-    <div className="container">
+    <div>
       <h2>Member Directory</h2>
       <Filters {...filter} />
       { members && members.length &&

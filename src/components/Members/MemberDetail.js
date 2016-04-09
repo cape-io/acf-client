@@ -14,7 +14,7 @@ function MembersDetail(props) {
     <div>
       <Breadcrumb path={[ { text: 'Members', link: '/members' } ]} activeTitle={displayName} />
       <section>
-        <div className="container">
+        <div>
           <LeftSidebar {...props} />
           <Right {...props} />
         </div>
