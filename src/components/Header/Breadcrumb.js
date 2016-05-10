@@ -8,10 +8,10 @@ function Breadcrumb({ activeTitle, path }) {
       <div className="container">
         {/* breadcrumbs */}
         <ol className="breadcrumb breadcrumb-inverse">
-          { map(path, ({ link, text }) =>
-              <li><Link to={link}>{text}</Link></li>
+          {map(path, ({ link, text }, index) =>
+            <li key={index}><Link to={link}>{text}</Link></li>
           )}
-          { activeTitle && <li className="active">{activeTitle}</li> }
+          {activeTitle && <li className="active">{activeTitle}</li>}
         </ol>{/* /breadcrumbs */}
       </div>
     </section>

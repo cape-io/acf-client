@@ -1,22 +1,20 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import { loadMembers } from '../redux/actions'
 import getRouteInfo from '../redux/routes'
 
-// import Header from '../components/Header/Header'
-// <Header navLinks={navLinks} styles={{}} title={title} />
+import Header from '../components/Header/Header'
 import Router from './Router'
 
-class App extends Component {
-  render() {
-    const { navLinks, route, title } = this.props
-    return (
-      <div id="wrapper">
-        <Router {...route} />
-      </div>
-    )
-  }
+function App(props) {
+  const { navLinks, route, title } = props
+  return (
+    <div id="wrapper">
+      <Header navLinks={navLinks} styles={{}} title={title} />
+      <Router {...route} />
+    </div>
+  )
 }
 
 App.propTypes = {
