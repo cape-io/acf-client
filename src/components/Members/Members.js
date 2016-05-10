@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import masonry from 'react-masonry-component'
-const Masonry = masonry(React)
+import Masonry from 'react-masonry-component'
 
 import MembersPreview from './MembersPreview'
 import Loading from '../Loading'
@@ -20,7 +19,7 @@ function Members(props) {
     <div>
       <h2>Member Directory</h2>
       <Filters {...filter} />
-      { members && members.length &&
+      {members && members.length &&
         <div>
           <Masonry
             className={'row masonry'}
@@ -28,12 +27,12 @@ function Members(props) {
             options={masonryOptions}
             disableImagesLoaded={false}
           >
-            { members.map(member => <MembersPreview key={member.slug} {...member} />) }
+            {members.map(member => <MembersPreview key={member.slug} {...member} />)}
           </Masonry>
           <Pager hasLess={hasLess} hasMore={hasMore} pageIndex={pageIndex} />
         </div>
       }
-      { !members || !members.length &&
+      {!members || !members.length &&
         <div className="container">
           <Loading message={'No members to display.'} />
         </div>
