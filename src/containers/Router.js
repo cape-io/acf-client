@@ -19,7 +19,7 @@ function Router(props) {
   // Select your component from the routeIndex defined above.
   // console.log('routeId', id)
   // Provide default Component if there is no match.
-  const MainElement = get(routeIndex, id, routeIndex.home)
+  const MainElement = get(routeIndex, id, routeIndex.members)
   // Render that component. Send along any props this component got.
   return <MainElement {...props} />
 }

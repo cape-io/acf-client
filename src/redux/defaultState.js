@@ -4,7 +4,7 @@ function createNavLink(id, args = {}) {
     authenticated,
     id,
     text: text || id.charAt(0).toUpperCase() + id.slice(1),
-    to: to || '/' + id,
+    to: to || `/${id}`,
     href,
     ...rest,
   }
@@ -22,7 +22,7 @@ export default {
     tagline: 'Create Anywhere Publish Everywhere',
     navLinks: [
       createNavLink('about', { text: 'About Us' }),
-      createNavLink('members'),
+      createNavLink('members', { to: '/' }),
       createNavLink('acf40', {
         text: 'ACF 40',
         href: 'https://composersforum.org/acf40',

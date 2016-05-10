@@ -7,7 +7,6 @@ import { parse } from 'query-string'
  */
 const router = createRouter({ parseSearch: parse, trailingSlash: false })
 const { addRoute, addRoutes, locationInfo } = router
-addRoute('home', '/')
 addRoute('members', '/members')
 addRoute('member', '/members/(:id)')
 addRoutes([
