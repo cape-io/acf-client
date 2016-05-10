@@ -10,7 +10,7 @@ function Search({ form: { value }, formEvent }) {
         name="item-search"
         placeholder="Search by name"
         type="text"
-        value={value}
+        value={value || ''}
       />
     </div>
   )
@@ -21,6 +21,7 @@ Search.propTypes = {
   formEvent: PropTypes.object,
 }
 Search.defaultProps = {
+  value: '',
 }
 
 export default connectField({ prefix: [ 'search' ] })(Search)

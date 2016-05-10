@@ -5,7 +5,7 @@ import Select from './Select'
 
 function Filter({ form: { value }, formEvent, ...props }) {
   return (
-    <Select {...formEvent} {...props} value={value} />
+    <Select {...formEvent} {...props} value={value || '-'} />
   )
 }
 
